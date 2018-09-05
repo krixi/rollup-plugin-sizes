@@ -59,7 +59,8 @@ module.exports = (options) => {
                 totals = [],
                 total = 0;
 
-            details.bundle.modules.forEach((module) => {
+            for(var moduleName in details.bundle.modules) {
+                var module = details.bundle.modules[moduleName];
                 var parsed;
 
                 // Handle rollup-injected helpers
@@ -86,7 +87,7 @@ module.exports = (options) => {
                 }
 
                 data[parsed.name].push(Object.assign(parsed, { size : module.code.length }));
-            });
+            };
 
             // Sum all files in each chunk
             each(data, (files, name) => {
